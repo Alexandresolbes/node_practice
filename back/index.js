@@ -8,49 +8,55 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// DB configuration de la connection a la base de donnée
-
 const adresseBdd = "mongodb+srv://alexandresolbes:dipdip77@cluster0.yicncsb.mongodb.net/";
 
 mongoose.connect(adresseBdd, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log("Connecté à la base de donnée");
-    })
-    .catch((err) => {
-        console.log("Erreur de connection à la base de donnée");
-        console.log(err);
-    });
-
-// Schema de la base de données
-
-const carSchema = new mongoose.Schema({
-  brand: String ,
-  year: Number ,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log("⚡⚡ Connected to the database !! ⚡⚡");
+})
+.catch((err) => {
+  console.log("❌🆘 Connection to the database failed 🆘❌ ");
+  console.log(err);
 });
 
 
-const Car = mongoose.model("Car", carSchema);
+//app = nom de l'application express ligne 5
+//GET nom de la fonction de l'application qui fait le liens entre la route et la fonction
+// param1 est l'url du endpoint
+// param2 la fonction a executer quand le endpoint recoi un truc
+app.get("/api",  (req, res) => {
+  console.log("je suis ici");
+  res.send("je suis la");
+});
 
-const small = new Car ({brand: 'Toyota'});
+//app = nom de l'application express ligne 5
+//GET nom de la fonction de l'application qui fait le liens entre la route et la fonction
+// param1 est l'url du endpoint
+// param2 la fonction a executer quand le endpoint recoi un truc
+app.put("/api",  (req, res) => {
+  console.log(req.body.id);
+  res.send("je suis la");
+});
 
-small.save();
+//app = nom de l'application express ligne 5
+//GET nom de la fonction de l'application qui fait le liens entre la route et la fonction
+// param1 est l'url du endpoint
+// param2 la fonction a executer quand le endpoint recoi un truc
+app.post("/api",  (req, res) => {
+  console.log("je suis ici");
+  res.send("je suis la");
+});
 
-app.post("/api/car", (req, res) => {
-  const car = new Car({
-      brand: req.body.brand,
-      year: req.body.year,
-  });
-
-  car.save()
-      .then(() => {
-          res.status(201).json({ message: "Car saved successfully" });
-      })
-      .catch((error) => {
-          res.status(500).json({ error: "Failed to save car" });
-      });
+//app = nom de l'application express ligne 5
+//GET nom de la fonction de l'application qui fait le liens entre la route et la fonction
+// param1 est l'url du endpoint
+// param2 la fonction a executer quand le endpoint recoi un truc
+app.delete("/api",  (req, res) => {
+  console.log("je suis ici");
+  res.send("je suis la");
 });
 
 
